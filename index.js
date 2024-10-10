@@ -1,3 +1,4 @@
+const main = document.querySelector('main');
 const squareContainer = document.querySelector("#square-container");
 let squareContainerInfo = squareContainer.getBoundingClientRect();
 
@@ -15,7 +16,19 @@ const drawGrid = function (gridsize = 16){
             column.textContent = i + 1;
             row.appendChild(column);
         }
-    }   
+    }
+    // recalculate the width of the container each time the window resizes
+    window.addEventListener('resize', function(event) {
+        const mainInfo = main.getBoundingClientRect();
+        squareContainer.style.width = `${mainInfo.width * 0.5}px`;
+        const columns = document.querySelectorAll('.column');
+        columns.forEach((column) => {
+            column.style = `width: ${mainInfo.width * 0.5/gridsize}px; height: ${mainInfo.width * 0.5/gridsize}px;`;
+        });
+        console.log(squareContainer.style.width);
+    }, true);   
 }
+
+
 
 drawGrid();
