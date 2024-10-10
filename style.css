@@ -2,8 +2,14 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: 50%;
 }
 
-.square {
-    border: 1px solid black;
+.row {
+    display: flex;
+    flex-basis: 100%;
+}
+
+.column {
+
 }
