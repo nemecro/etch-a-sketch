@@ -1,6 +1,8 @@
 const main = document.querySelector('main');
 const squareContainer = document.querySelector("#square-container");
+const sizeCoefficient = 0.35;
 let mainInfo = main.getBoundingClientRect();
+
 
 const getRandomValue = function(from, to){
     let randomValue;
@@ -11,9 +13,13 @@ const getRandomValue = function(from, to){
 // write a function that will draw certain amount of squares
 // based on the user input or DEFAULT 16x16
 const drawGrid = function (gridsize = 16){
+    const setSquareContainerSize = function(){
+        squareContainer.style.width = `${mainInfo.width * sizeCoefficient}px`;
+    }
+    setSquareContainerSize();
     const adjustColumnSize = function(column, mainSize){
-        column.style.width = `${mainSize.width * 0.5/gridsize}px`;
-        column.style.height = `${mainSize.width * 0.5/gridsize}px`;
+        column.style.width = `${mainSize.width * sizeCoefficient/gridsize}px`;
+        column.style.height = `${mainSize.width * sizeCoefficient/gridsize}px`;
     }
     for (let i = 0; i < gridsize; i++){
         const row = document.createElement('div');
@@ -30,7 +36,7 @@ const drawGrid = function (gridsize = 16){
     // recalculate the width of the container and columns each time the window resizes
     window.addEventListener('resize', function(event) {
         mainInfo = main.getBoundingClientRect();
-        squareContainer.style.width = `${mainInfo.width * 0.5}px`;
+        setSquareContainerSize();
         columns.forEach((column) => {
             adjustColumnSize(column, mainInfo);
         });
