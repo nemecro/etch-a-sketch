@@ -13,11 +13,10 @@ const drawGrid = function (gridsize = 16){
             const column = document.createElement('div');
             column.classList.add('column');
             column.style = `width: ${squareContainerInfo.width/gridsize}px; height: ${squareContainerInfo.width/gridsize}px;`;
-            column.textContent = i + 1;
             row.appendChild(column);
         }
     }
-    // recalculate the width of the container each time the window resizes
+    // recalculate the width of the container and columns each time the window resizes
     window.addEventListener('resize', function(event) {
         const mainInfo = main.getBoundingClientRect();
         squareContainer.style.width = `${mainInfo.width * 0.5}px`;
