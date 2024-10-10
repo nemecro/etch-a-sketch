@@ -2,6 +2,12 @@ const main = document.querySelector('main');
 const squareContainer = document.querySelector("#square-container");
 let mainInfo = main.getBoundingClientRect();
 
+const getRandomValue = function(from, to){
+    let randomValue;
+    randomValue = Math.floor(Math.random() * (to - from + 1) + from);
+    return randomValue;
+}
+
 // write a function that will draw certain amount of squares
 // based on the user input or DEFAULT 16x16
 const drawGrid = function (gridsize = 16){
@@ -19,15 +25,27 @@ const drawGrid = function (gridsize = 16){
             row.appendChild(column);
         }
     }
+    const columns = document.querySelectorAll('.column');
     // recalculate the width of the container and columns each time the window resizes
     window.addEventListener('resize', function(event) {
         mainInfo = main.getBoundingClientRect();
         squareContainer.style.width = `${mainInfo.width * 0.5}px`;
-        const columns = document.querySelectorAll('.column');
         columns.forEach((column) => {
             adjustColumnSize(column, mainInfo);
         });
-    }, true);   
+    }, true);
+
+    // change columns color on hover
+    const changeToRandomColor = function(element){
+        element.style.backgroundColor = `rgb(${getRandomValue(0, 255)},${getRandomValue(0, 255)},${getRandomValue(0, 255)})`;
+    }
+
+    columns.forEach((column) => {
+        column.addEventListener('mouseover', () => {
+            changeToRandomColor(column);
+        });
+    })
+
 }
 
 
