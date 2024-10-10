@@ -12,7 +12,8 @@ const getRandomValue = function(from, to){
 // based on the user input or DEFAULT 16x16
 const drawGrid = function (gridsize = 16){
     const adjustColumnSize = function(column, mainSize){
-        column.style = `width: ${mainSize.width * 0.5/gridsize}px; height: ${mainSize.width * 0.5/gridsize}px;`;
+        column.style.width = `${mainSize.width * 0.5/gridsize}px`;
+        column.style.height = `${mainSize.width * 0.5/gridsize}px`;
     }
     for (let i = 0; i < gridsize; i++){
         const row = document.createElement('div');
