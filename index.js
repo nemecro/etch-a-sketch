@@ -1,10 +1,13 @@
 const main = document.querySelector('main');
 const squareContainer = document.querySelector("#square-container");
-let squareContainerInfo = squareContainer.getBoundingClientRect();
+let mainInfo = main.getBoundingClientRect();
 
 // write a function that will draw certain amount of squares
 // based on the user input or DEFAULT 16x16
 const drawGrid = function (gridsize = 16){
+    const adjustColumnSize = function(column, mainSize){
+        column.style = `width: ${mainSize.width * 0.5/gridsize}px; height: ${mainSize.width * 0.5/gridsize}px;`;
+    }
     for (let i = 0; i < gridsize; i++){
         const row = document.createElement('div');
         row.classList.add('row');
@@ -12,19 +15,18 @@ const drawGrid = function (gridsize = 16){
         for (let j = 0; j < gridsize; j++){
             const column = document.createElement('div');
             column.classList.add('column');
-            column.style = `width: ${squareContainerInfo.width/gridsize}px; height: ${squareContainerInfo.width/gridsize}px;`;
+            adjustColumnSize(column, mainInfo);
             row.appendChild(column);
         }
     }
     // recalculate the width of the container and columns each time the window resizes
     window.addEventListener('resize', function(event) {
-        const mainInfo = main.getBoundingClientRect();
+        mainInfo = main.getBoundingClientRect();
         squareContainer.style.width = `${mainInfo.width * 0.5}px`;
         const columns = document.querySelectorAll('.column');
         columns.forEach((column) => {
-            column.style = `width: ${mainInfo.width * 0.5/gridsize}px; height: ${mainInfo.width * 0.5/gridsize}px;`;
+            adjustColumnSize(column, mainInfo);
         });
-        console.log(squareContainer.style.width);
     }, true);   
 }
 
