@@ -1,5 +1,6 @@
 const main = document.querySelector('main');
-const squareContainer = document.querySelector("#square-container");
+const summonPromptBtn = document.querySelector('#summon-prompt');
+const squareContainer = document.querySelector('#square-container');
 const sizeCoefficient = 0.35;
 let mainInfo = main.getBoundingClientRect();
 
@@ -55,6 +56,17 @@ const drawGrid = function (gridsize = 16){
 
 }
 
-
-
 drawGrid();
+
+const removeGrid = function (){
+    const rows = document.querySelectorAll('.row');
+    rows.forEach(row => {
+        squareContainer.removeChild(row);
+    })
+}
+
+summonPromptBtn.addEventListener('click', () => {
+    const gridSize = prompt("Enter a grid size: ");
+    removeGrid();    
+    drawGrid(gridSize);
+});
