@@ -37,4 +37,14 @@ h1 {
 
 #summon-prompt {
     display: block;
+    padding: 10px;
+    background-color: transparent;
+    border: 2px solid black;
+    transition: 200ms;
+    cursor: pointer;
+}
+
+#summon-prompt:hover {
+    background-color: black;
+    color: white;
 }
